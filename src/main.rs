@@ -23,6 +23,9 @@ struct Args{
 
     #[arg(short, long, action = SetTrue)]
     number : bool,
+
+    #[arg(short, long, action = SetTrue)]
+    bar : bool,
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -31,6 +34,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let file_name : PathBuf = args.file_name;
     let search_word : String = args.search_word;
     let with_line_number = args.number;
+    let with_separate_bar = args.bar;
     let bar = "=".repeat(10);
 
     if !file_name.exists() {
@@ -67,7 +71,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut index : i32 = 0;
     for line in BufReader::new(File::open(&file_name)?).lines() {
         let line = line?;
-        if (display.contains(&index) || matched.contains(&index)) && index != 0 && !display.contains(&(index - 1)) && !matched.contains(&(index - 1)) { println!("{}", &bar) };
+        if (display.contains(&index) || matched.contains(&index)) && with_separate_bar && index != 0 && !display.contains(&(index - 1)) && !matched.contains(&(index - 1)) { println!("{}", &bar) };
         if matched.contains(&index) {
             print!("{}", prefix(&index, &with_line_number));
             color_print(&search_word, &line);
