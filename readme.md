@@ -5,7 +5,8 @@ Made by Rust.
 # Usage
 - -f : target file name. **(need)**
 - -s : regex pattern **(need)**
-- -n : display line numbers or not. flag.
+- -n : display line numbers or not. (flag)
+- -b : with separate bar. (flag)
 - -l : displays lines what are placed near a line what be matched with a given regex pattern. (int/ 0 ~)
 
 ---
@@ -20,7 +21,14 @@ fifth line
 goodbye world
 ```
 
-command : `cargo run -- -f=test.txt -s=world -l=1`
+command : `cargo run -- -f=test.txt -s=world`
+
+```text
+hello world
+goodbye world
+```
+
+command : `cargo run -- -f=test.txt -s=world -l=1 -b`
 ```text
 ==========
 hello world
@@ -32,7 +40,7 @@ goodbye world
 
 ---
 
-command : `cargo run -- -f=test.txt -s=world -l=1 -n`
+command : `cargo run -- -f=test.txt -s=world -l=1 -n -b`
 ```text
 ==========
 1 hello world
